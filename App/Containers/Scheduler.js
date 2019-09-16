@@ -1,19 +1,11 @@
-import React, { Component } from 'react';
-import {
-  ScrollView,
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Button
-} from 'react-native';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {ScrollView, View, Text} from 'react-native';
 import ButtonBox from '../Components/ButtonBox';
-import { Images } from '../Themes';
+import {Images} from '../Themes';
 
-import { Calendar } from 'react-native-calendars';
+import {Calendar} from 'react-native-calendars';
 import StepIndicator from 'react-native-step-indicator';
-import { Snackbar } from 'react-native-paper';
+import {Snackbar} from 'react-native-paper';
 
 import styles from './Styles/SchedulerStyle';
 export default class Scheduler extends React.Component {
@@ -30,8 +22,7 @@ export default class Scheduler extends React.Component {
         <ScrollView
           showsVerticalScrollIndicator={false}
           bounces={false}
-          style={styles.container}
-        >
+          style={styles.container}>
           <Text style={styles.Text}>Please Select Your Action</Text>
           <View style={styles.buttonsContainer}>
             <ButtonBox

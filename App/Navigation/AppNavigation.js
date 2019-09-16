@@ -1,14 +1,10 @@
 import React from 'react';
-import {
-  createAppContainer,
-  HeaderBackButton,
-  createStackNavigator,
-} from 'react-navigation';
-import {Dimensions} from 'react-native';
+import {createAppContainer, HeaderBackButton} from 'react-navigation';
+import {Dimensions, ScrollView, Text, Image, View} from 'react-native';
+import createStackNavigator from 'react-navigation-stack';
 //screen
 import AirConditioner from '../Containers/AirConditioner';
 import Scheduler from '../Containers/Scheduler';
-import Navigationmenu from '../Containers/Navigationmenu';
 import CalendarScreen from '../Containers/SchedulerScreens/CalenderScreen.js';
 import EndingClockScreen from '../Containers/SchedulerScreens/EndingClockScreen.js';
 import PeopleSelectScreen from '../Containers/SchedulerScreens/PeopleSelectScreen.js';
@@ -16,6 +12,85 @@ import RoomAndStartingClockScreen from '../Containers/SchedulerScreens/RoomAndSt
 import SummaryScreen from '../Containers/SchedulerScreens/SummaryScreen.js';
 import ListSchedulesByName from '../Containers/SchedulerScreens/ListSchedulesByName.js';
 
+import ButtonBox from '../Components/ButtonBox';
+import {Images} from '../Themes';
+import styles from './Styles/AppNavigationStyle';
+import Loading from '../Containers/Loading.js';
+
+class Navigationmenu extends React.Component {
+  constructor() {
+    super();
+    this.state = {isLoading: true};
+  }
+  timer() {}
+  async componentDidMount() {
+    const data = await this.performTimeConsumingTask();
+    if (data !== null) {
+      // alert('Moved to next Screen here');
+      this.setState({isLoading: false});
+    }
+  }
+  performTimeConsumingTask = async () => {
+    return new Promise(resolve =>
+      setTimeout(() => {
+        resolve('result');
+      }, 3000),
+    );
+  };
+
+  static navigationOptions = {
+    header: null,
+  };
+  openScheduler = () => {
+    console.log(this.props.navigation);
+    this.navigation.navigate('Scheduler');
+  };
+
+  openAC = () => {
+    this.navigation.navigate('AirConditioner');
+  };
+
+  render() {
+    if (this.state.isLoading) {
+      return <Loading />;
+    }
+    return (
+      <View style={styles.mainContainer}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+          style={styles.container}>
+          <View style={styles.centered}>
+            <Image source={Images.igniteClear} style={styles.logo} />
+          </View>
+          <Text style={styles.Text}>
+            ASTA<Text style={styles.Textcyan}>i</Text>R
+          </Text>
+          <Text style={styles.sectionText}>
+            Control Your Office As You Desire.
+          </Text>
+          <View style={styles.buttonsContainer}>
+            <ButtonBox
+              onPress={this.openScheduler}
+              style={styles.componentButton}
+              image={Images.schedulericon}
+              text="Scheduler"
+            />
+            <ButtonBox
+              onPress={this.openAC}
+              style={styles.componentButton}
+              image={Images.acicon}
+              text="Air Conditioner"
+            />
+          </View>
+        </ScrollView>
+        <View style={styles.banner}>
+          <Text style={styles.bannerLabel}>This is Astar Project</Text>
+        </View>
+      </View>
+    );
+  }
+}
 const myschedulesNavigator = createStackNavigator(
   {
     ListSchedulesByName: {
@@ -31,12 +106,13 @@ const myschedulesNavigator = createStackNavigator(
     },
   },
   {
+    initialRouteName: 'ListSchedulesByName',
     navigationOptions: {
       header: null,
     },
     defaultNavigationOptions: ({navigation}) => ({
       //don't forget parentheses around the object notation
-      title: 'Create New Schedule',
+      title: 'ListSchedulesByName',
       headerTitleStyle: {width: Dimensions.get('window').width},
       headerLeft: <HeaderBackButton onPress={() => navigation.goBack(null)} />,
     }),
@@ -104,8 +180,8 @@ const createnewscheduleNavigator = createStackNavigator(
       }),
     },
   },
-
   {
+    initialRouteName: 'CalendarScreen',
     navigationOptions: {
       header: null,
     },
@@ -143,6 +219,7 @@ const scheduleNavigator = createStackNavigator(
     manageschedules: {screen: myschedulesNavigator},
   },
   {
+    initialRouteName: 'Scheduler',
     navigationOptions: {
       header: null,
     },
@@ -159,14 +236,7 @@ const mainNavigator = createStackNavigator(
     AirConditioner: {screen: AirConditioner},
   },
   {
-    /* parent
-      navigationOptions: {
-        tabBarLabel: 'none!'
-      },
-      child
-      defaultNavigationOptions: {
-        title: 'NONE'
-      } */
+    initialRouteName: 'Navigationmenu',
   },
 );
 

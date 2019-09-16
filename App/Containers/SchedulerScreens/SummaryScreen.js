@@ -1,8 +1,7 @@
-import { Calendar } from 'react-native-calendars';
-import React, { Component } from 'react';
-import { ScrollView, View, Text, TouchableOpacity, Image } from 'react-native';
-import { connect } from 'react-redux';
-import { Images } from '../../Themes';
+import {Calendar} from 'react-native-calendars';
+import React, {Component} from 'react';
+import {ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
+import {Images} from '../../Themes';
 
 import styles from './Styles/SummaryScreenStyle';
 
@@ -18,7 +17,7 @@ export default class SummaryScreen extends React.Component {
 
         <ScrollView style={styles.container} ref="container">
           <View style={styles.scrollContent}>
-            <View style={{ alignItems: 'center', paddingTop: 60 }}>
+            <View style={{alignItems: 'center', paddingTop: 60}}>
               <Image source={Images.api} style={styles.logo} />
               <Text style={styles.titleText}>API</Text>
             </View>
