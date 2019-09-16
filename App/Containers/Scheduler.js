@@ -1,20 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {ScrollView, View, Text} from 'react-native';
 import ButtonBox from '../Components/ButtonBox';
 import {Images} from '../Themes';
 
 import {Calendar} from 'react-native-calendars';
-import StepIndicator from 'react-native-step-indicator';
 import {Snackbar} from 'react-native-paper';
 
 import styles from './Styles/SchedulerStyle';
 export default class Scheduler extends React.Component {
   openScheduler = () => {
-    this.props.navigation.navigate('Scheduler');
+    this.props.navigation.navigate('newschedule');
   };
 
-  openScheduler = () => {
-    this.props.navigation.navigate('Scheduler');
+  openManage = () => {
+    this.props.navigation.navigate('manageschedules');
   };
   render() {
     return (
@@ -28,14 +27,14 @@ export default class Scheduler extends React.Component {
             <ButtonBox
               onPress={this.openScheduler}
               style={styles.componentButton}
-              image={Images.schedulericon}
-              text="Create New Schedule"
+              image={Images.newicon}
+              text="Create New"
             />
             <ButtonBox
               onPress={this.openAC}
               style={styles.componentButton}
-              image={Images.acicon}
-              text="Manage my Schedules"
+              image={Images.manageicon}
+              text="Manage"
             />
           </View>
         </ScrollView>

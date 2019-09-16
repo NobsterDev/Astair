@@ -1,38 +1,52 @@
 import {Calendar} from 'react-native-calendars';
-import React, {Component} from 'react';
-import {ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
-import {Images} from '../../Themes';
-
+import React from 'react';
+import {ScrollView, View, Text} from 'react-native';
+import Stepindicator from '../../Components/StepIndicator';
 import styles from './Styles/CalendarStyle';
 
 export default class CalendarScreen extends React.Component {
+  todaydate() {
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    if (month < 10) {
+      month = '0' + month;
+    }
+    if (date < 10) {
+      date = '0' + date;
+    }
+    return year + '-' + month + '-' + date;
+  }
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Image
-          source={Images.background}
-          style={styles.backgroundImage}
-          resizeMode="stretch"
-        />
         <ScrollView style={styles.container} ref="container">
-          <View style={styles.scrollContent}>
-            <View style={{alignItems: 'center', paddingTop: 60}}>
-              <Image source={Images.api} style={styles.logo} />
-              <Text style={styles.titleText}>API</Text>
-            </View>
-            <View style={styles.section}>
-              <Text style={styles.sectionText}>
-                yoooooooooooooooooooooooothis is calendar biacth.Testing API
-                with Postman or APIary.io verifies the server works. The API
-                Test screen is the next step; a simple in-app way to verify and
-                debug your in-app API functions.
-              </Text>
-              <Text style={styles.sectionText}>
-                Create new endpoints in Services/Api.js then add example uses to
-                endpoints array in Containers/APITestingScreen.js
-              </Text>
-            </View>
-          </View>
+          <Stepindicator currentPosition={0} />
+
+          <Text style={styles.Text}>Select Desired Date</Text>
+          <Calendar
+            style={styles.Calendar}
+            onDayPress={day => {
+              this.props.navigation.navigate('RoomAndStartingClockScreen');
+            }}
+            hideExtraDays={true}
+            minDate={this.todaydate()}
+            // Collection of dates that have to be marked. Default = {}
+            markedDates={{
+              '2019-09-11': {
+                selected: true,
+                marked: true,
+                selectedColor: 'blue',
+              },
+              '2019-09-16': {marked: true},
+              '2019-09-17': {
+                marked: true,
+                dotColor: 'red',
+                activeOpacity: 0,
+              },
+              '2019-09-04': {disabled: true, disableTouchEvent: true},
+            }}
+          />
         </ScrollView>
       </View>
     );

@@ -1,7 +1,7 @@
-import {Calendar} from 'react-native-calendars';
-import React, {Component} from 'react';
-import {ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
+import React from 'react';
+import {ScrollView, View, Text, Image} from 'react-native';
 import {Images} from '../../Themes';
+import Stepindicator from '../../Components/StepIndicator';
 
 import styles from './Styles/RoomAndStartingClockScreenStyle';
 
@@ -9,13 +9,8 @@ export default class RoomAndStartingClockScreen extends React.Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Image
-          source={Images.background}
-          style={styles.backgroundImage}
-          resizeMode="stretch"
-        />
-
         <ScrollView style={styles.container} ref="container">
+          <Stepindicator currentPosition={1} />
           <View style={styles.scrollContent}>
             <View style={{alignItems: 'center', paddingTop: 60}}>
               <Image source={Images.api} style={styles.logo} />

@@ -111,50 +111,36 @@ const myschedulesNavigator = createStackNavigator(
     navigationOptions: {
       header: null,
     },
-    defaultNavigationOptions: ({navigation}) => ({
+    defaultNavigationOptions: {
       //don't forget parentheses around the object notation
       title: 'ListSchedulesByName',
-      headerTitleStyle: {width: Dimensions.get('window').width},
-      headerLeft: <HeaderBackButton onPress={() => navigation.goBack(null)} />,
-    }),
+    },
   },
 );
 const createnewscheduleNavigator = createStackNavigator(
   {
     CalendarScreen: {
       screen: CalendarScreen,
-      navigationOptions: ({navigation}) => ({
+      navigationOptions: {
         //don't forget parentheses around the object notation
         title: 'Calendar',
-        headerTitleStyle: {width: Dimensions.get('window').width},
-        headerLeft: (
-          <HeaderBackButton onPress={() => navigation.goBack(null)} />
-        ),
-      }),
+      },
     },
 
     RoomAndStartingClockScreen: {
       screen: RoomAndStartingClockScreen,
-      navigationOptions: ({navigation}) => ({
+      navigationOptions: {
         //don't forget parentheses around the object notation
         title: 'RoomAndStartingClockScreen',
-        headerTitleStyle: {width: Dimensions.get('window').width},
-        headerLeft: (
-          <HeaderBackButton onPress={() => navigation.goBack(null)} />
-        ),
-      }),
+      },
     },
 
     EndingClockScreen: {
       screen: EndingClockScreen,
-      navigationOptions: ({navigation}) => ({
+      navigationOptions: {
         //don't forget parentheses around the object notation
         title: 'EndingClockScreen',
-        headerTitleStyle: {width: Dimensions.get('window').width},
-        headerLeft: (
-          <HeaderBackButton onPress={() => navigation.goBack(null)} />
-        ),
-      }),
+      },
     },
 
     PeopleSelectScreen: {
@@ -162,10 +148,6 @@ const createnewscheduleNavigator = createStackNavigator(
       navigationOptions: ({navigation}) => ({
         //don't forget parentheses around the object notation
         title: 'PeopleSelectScreen',
-        headerTitleStyle: {width: Dimensions.get('window').width},
-        headerLeft: (
-          <HeaderBackButton onPress={() => navigation.goBack(null)} />
-        ),
       }),
     },
 
@@ -174,10 +156,6 @@ const createnewscheduleNavigator = createStackNavigator(
       navigationOptions: ({navigation}) => ({
         //don't forget parentheses around the object notation
         title: 'SummaryScreen',
-        headerTitleStyle: {width: Dimensions.get('window').width},
-        headerLeft: (
-          <HeaderBackButton onPress={() => navigation.goBack(null)} />
-        ),
       }),
     },
   },
@@ -189,8 +167,17 @@ const createnewscheduleNavigator = createStackNavigator(
     defaultNavigationOptions: ({navigation}) => ({
       //don't forget parentheses around the object notation
       title: 'Create New Schedule',
+      headerTintColor: '#FFFFFF',
+      headerStyle: {
+        backgroundColor: '#000051',
+      },
       headerTitleStyle: {width: Dimensions.get('window').width},
-      headerLeft: <HeaderBackButton onPress={() => navigation.goBack(null)} />,
+      headerLeft: (
+        <HeaderBackButton
+          tintColor="#FFFFFF"
+          onPress={() => navigation.goBack(null)}
+        />
+      ),
     }),
   },
 );

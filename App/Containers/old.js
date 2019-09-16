@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Text,
   Container,
@@ -13,13 +13,13 @@ import {
   Body,
   Title,
   Right,
-  View
+  View,
 } from 'native-base';
 import StepIndicator from 'react-native-step-indicator';
-import { ScrollView } from 'react-native';
-import { Calendar } from 'react-native-calendars';
+import {ScrollView} from 'react-native';
+import {Calendar} from 'react-native-calendars';
 
-import { Snackbar } from 'react-native-paper';
+import {Snackbar} from 'react-native-paper';
 
 const customStyles = {
   stepIndicatorSize: 30,
@@ -39,7 +39,7 @@ const customStyles = {
   stepIndicatorLabelUnFinishedColor: '#FAFAFA',
   labelColor: '#666666',
   labelSize: 15,
-  currentStepLabelColor: '#3949AB'
+  currentStepLabelColor: '#3949AB',
 };
 
 const labels = [
@@ -47,7 +47,7 @@ const labels = [
   'Room and Start Time',
   'End Time Of Schelude',
   'Attenders Selection',
-  'The         Summary'
+  'The         Summary',
 ];
 
 class Schedule extends Component {
@@ -59,37 +59,37 @@ class Schedule extends Component {
       clockselected: '',
       peopleselected: [],
       timeandroomavailabletoselect: [
-        { id: 0, time: '10:30', room: 'alpha' },
-        { id: 1, time: '10:30', room: 'beta' },
-        { id: 2, time: '10:30', room: 'charlie' },
-        { id: 3, time: '11:30', room: 'alpha1' },
-        { id: 4, time: '11:30', room: 'beta1' },
-        { id: 5, time: '11:30', room: 'charlie1' },
-        { id: 6, time: '11:30', room: 'alpha1' },
-        { id: 7, time: '11:30', room: 'beta1' },
-        { id: 8, time: '11:30', room: 'charlie1' },
-        { id: 9, time: '11:30', room: 'alpha1' },
-        { id: 10, time: '11:30', room: 'beta1' },
-        { id: 11, time: '11:30', room: 'charlie1' },
-        { id: 12, time: '11:30', room: 'alpha1' },
-        { id: 13, time: '11:30', room: 'beta1' },
-        { id: 14, time: '11:30', room: 'charlie1' }
+        {id: 0, time: '10:30', room: 'alpha'},
+        {id: 1, time: '10:30', room: 'beta'},
+        {id: 2, time: '10:30', room: 'charlie'},
+        {id: 3, time: '11:30', room: 'alpha1'},
+        {id: 4, time: '11:30', room: 'beta1'},
+        {id: 5, time: '11:30', room: 'charlie1'},
+        {id: 6, time: '11:30', room: 'alpha1'},
+        {id: 7, time: '11:30', room: 'beta1'},
+        {id: 8, time: '11:30', room: 'charlie1'},
+        {id: 9, time: '11:30', room: 'alpha1'},
+        {id: 10, time: '11:30', room: 'beta1'},
+        {id: 11, time: '11:30', room: 'charlie1'},
+        {id: 12, time: '11:30', room: 'alpha1'},
+        {id: 13, time: '11:30', room: 'beta1'},
+        {id: 14, time: '11:30', room: 'charlie1'},
       ],
       endtimeavailabletoselect: [
-        { id: 0, time: '10:30', room: 'alpha' },
-        { id: 1, time: '11:30', room: 'alpha' },
-        { id: 2, time: '12:30', room: 'alpha' }
+        {id: 0, time: '10:30', room: 'alpha'},
+        {id: 1, time: '11:30', room: 'alpha'},
+        {id: 2, time: '12:30', room: 'alpha'},
       ],
       peopleavailabletoselect: [
         {
-          name: 'People1'
+          name: 'People1',
         },
         {
-          name: 'People2'
+          name: 'People2',
         },
         {
-          name: 'People3'
-        }
+          name: 'People3',
+        },
       ],
       endclockselected: '',
       timegap: '',
@@ -102,7 +102,7 @@ class Schedule extends Component {
       snackbarvisible: false,
       snackbarvisiblelabel: '',
       warnsnackbarvisible: false,
-      warnsnackbarvisiblelabel: ''
+      warnsnackbarvisiblelabel: '',
     };
   }
 
@@ -121,12 +121,12 @@ class Schedule extends Component {
       summary: 0,
       currentPosition: 0,
       snackbarvisible: false,
-      snackbarvisiblelabel: ''
+      snackbarvisiblelabel: '',
     });
   }
 
   onPageChange(position) {
-    this.setState({ currentPosition: position });
+    this.setState({currentPosition: position});
   }
   todaydate() {
     var date = new Date().getDate(); //Current Date
@@ -158,8 +158,7 @@ class Schedule extends Component {
               onPress={() => {
                 this.props.navigation.goBack();
                 this.componentWillUnmount();
-              }}
-            >
+              }}>
               <Icon name="arrow-back" />
             </Button>
           </Left>
@@ -174,10 +173,9 @@ class Schedule extends Component {
               marginTop: 20,
               marginBottom: 30,
               marginLeft: 5,
-              marginRight: 5
-            }}
-          >
-            <Card style={{ padding: 20 }}>
+              marginRight: 5,
+            }}>
+            <Card style={{padding: 20}}>
               <StepIndicator
                 customStyles={customStyles}
                 currentPosition={this.state.currentPosition}
@@ -188,11 +186,11 @@ class Schedule extends Component {
 
           {this.state.viewdate === 1 && (
             <View>
-              <Card style={{ marginLeft: 25, marginRight: 25, marginTop: 25 }}>
+              <Card style={{marginLeft: 25, marginRight: 25, marginTop: 25}}>
                 <Calendar
                   onDayPress={day => {
                     this.setState(() => ({
-                      snackbarvisible: false
+                      snackbarvisible: false,
                     }));
                     this.setState(() => ({
                       snackbarvisible: true,
@@ -206,7 +204,7 @@ class Schedule extends Component {
                       currentPosition: 1,
                       dateselected: day.dateString,
                       viewdate: 0,
-                      viewclockandroom: 1
+                      viewclockandroom: 1,
                     }));
                   }}
                   hideExtraDays={true}
@@ -216,15 +214,15 @@ class Schedule extends Component {
                     '2019-09-11': {
                       selected: true,
                       marked: true,
-                      selectedColor: 'blue'
+                      selectedColor: 'blue',
                     },
-                    '2019-09-16': { marked: true },
+                    '2019-09-16': {marked: true},
                     '2019-09-17': {
                       marked: true,
                       dotColor: 'red',
-                      activeOpacity: 0
+                      activeOpacity: 0,
                     },
-                    '2019-09-04': { disabled: true, disableTouchEvent: true }
+                    '2019-09-04': {disabled: true, disableTouchEvent: true},
                   }}
                 />
               </Card>
@@ -234,15 +232,14 @@ class Schedule extends Component {
           {this.state.viewclockandroom === 1 && (
             <View>
               {Object.keys(
-                this.groupBy(this.state.timeandroomavailabletoselect, 'time')
+                this.groupBy(this.state.timeandroomavailabletoselect, 'time'),
               ).map((key, index) => (
                 <Card
-                  style={{ marginLeft: 15, marginRight: 15, marginBottom: 25 }}
-                  key={index}
-                >
+                  style={{marginLeft: 15, marginRight: 15, marginBottom: 25}}
+                  key={index}>
                   <Content>
-                    <Separator bordered style={{ backgroundColor: '#E8EAF6' }}>
-                      <Text style={{ fontSize: 16, color: '#424242' }}>
+                    <Separator bordered style={{backgroundColor: '#E8EAF6'}}>
+                      <Text style={{fontSize: 16, color: '#424242'}}>
                         {'At: ' + key + ' Available Rooms'}
                       </Text>
                     </Separator>
@@ -254,7 +251,7 @@ class Schedule extends Component {
                           style={{}}
                           onPress={() => {
                             this.setState(() => ({
-                              snackbarvisible: false
+                              snackbarvisible: false,
                             }));
                             this.setState(() => ({
                               snackbarvisible: true,
@@ -267,10 +264,9 @@ class Schedule extends Component {
                               viewclockandroom: 0,
                               viewenddateandgap: 1,
                               clockselected: item.time,
-                              roomselected: item.room
+                              roomselected: item.room,
                             }));
-                          }}
-                        >
+                          }}>
                           <Text>{item.room}</Text>
                         </ListItem>
                       ))}
@@ -289,19 +285,18 @@ class Schedule extends Component {
                   marginLeft: 15,
                   marginRight: 15,
                   padding: 10,
-                  backgroundColor: '#E8EAF6'
-                }}
-              >
-                <Text style={{ fontSize: 16, margin: 5 }}>
+                  backgroundColor: '#E8EAF6',
+                }}>
+                <Text style={{fontSize: 16, margin: 5}}>
                   You have selected {this.state.roomselected} Room, Starting at{' '}
                   {this.state.clockselected}
                 </Text>
               </Card>
 
-              <Card style={{ marginLeft: 15, marginRight: 15 }}>
+              <Card style={{marginLeft: 15, marginRight: 15}}>
                 <Content>
-                  <Separator bordered style={{ backgroundColor: '#E8EAF6' }}>
-                    <Text style={{ fontSize: 16, color: '#424242' }}>
+                  <Separator bordered style={{backgroundColor: '#E8EAF6'}}>
+                    <Text style={{fontSize: 16, color: '#424242'}}>
                       {'Possible Meeting Finishing Times'}
                     </Text>
                   </Separator>
@@ -312,7 +307,7 @@ class Schedule extends Component {
                         style={{}}
                         onPress={() => {
                           this.setState(() => ({
-                            snackbarvisible: false
+                            snackbarvisible: false,
                           }));
                           this.setState(() => ({
                             snackbarvisible: true,
@@ -320,10 +315,9 @@ class Schedule extends Component {
                             endclockselected: item.time,
                             currentPosition: 3,
                             viewpeople: 1,
-                            viewenddateandgap: 0
+                            viewenddateandgap: 0,
                           }));
-                        }}
-                      >
+                        }}>
                         <Text>{item.time}</Text>
                       </ListItem>
                     );
@@ -341,18 +335,17 @@ class Schedule extends Component {
                   marginLeft: 15,
                   marginRight: 15,
                   padding: 10,
-                  backgroundColor: '#E8EAF6'
-                }}
-              >
-                <Text style={{ fontSize: 16, margin: 5 }}>
+                  backgroundColor: '#E8EAF6',
+                }}>
+                <Text style={{fontSize: 16, margin: 5}}>
                   Your Meeting Starts at {this.state.clockselected} and Finishes
                   at {this.state.endclockselected}
                 </Text>
               </Card>
               {this.state.peopleavailabletoselect.length !== 0 && (
-                <Card style={{ marginLeft: 15, marginRight: 15 }}>
-                  <Separator bordered style={{ backgroundColor: '#E8EAF6' }}>
-                    <Text style={{ fontSize: 16, color: '#424242' }}>
+                <Card style={{marginLeft: 15, marginRight: 15}}>
+                  <Separator bordered style={{backgroundColor: '#E8EAF6'}}>
+                    <Text style={{fontSize: 16, color: '#424242'}}>
                       {'Possible People At That Time'}
                     </Text>
                   </Separator>
@@ -366,15 +359,14 @@ class Schedule extends Component {
                           if (index1 > -1) {
                             array.splice(index1, 1);
                           }
-                          this.setState({ peopleavailabletoselect: array });
+                          this.setState({peopleavailabletoselect: array});
                           this.setState({
                             peopleselected: [
                               ...this.state.peopleselected,
-                              item.name
-                            ]
+                              item.name,
+                            ],
                           });
-                        }}
-                      >
+                        }}>
                         <Text>{item.name}</Text>
                       </ListItem>
                     );
@@ -383,11 +375,10 @@ class Schedule extends Component {
               )}
               {this.state.peopleselected !== 0 && (
                 <Card
-                  style={{ marginLeft: 15, marginRight: 15, marginBottom: 20 }}
-                >
+                  style={{marginLeft: 15, marginRight: 15, marginBottom: 20}}>
                   <Content>
-                    <Separator bordered style={{ backgroundColor: '#E8EAF6' }}>
-                      <Text style={{ fontSize: 16, color: '#424242' }}>
+                    <Separator bordered style={{backgroundColor: '#E8EAF6'}}>
+                      <Text style={{fontSize: 16, color: '#424242'}}>
                         {'Selected People'}
                       </Text>
                     </Separator>
@@ -401,15 +392,14 @@ class Schedule extends Component {
                             if (index1 > -1) {
                               array.splice(index1, 1);
                             }
-                            this.setState({ peopleselected: array });
+                            this.setState({peopleselected: array});
                             this.setState({
                               peopleavailabletoselect: [
                                 ...this.state.peopleavailabletoselect,
-                                { name: item }
-                              ]
+                                {name: item},
+                              ],
                             });
-                          }}
-                        >
+                          }}>
                           <Text>{item}</Text>
                         </ListItem>
                       );
@@ -421,22 +411,22 @@ class Schedule extends Component {
                 block
                 style={{
                   marginLeft: 20,
-                  marginRight: 20
+                  marginRight: 20,
                 }}
                 onPress={() => {
                   if (this.state.peopleselected.length === 0) {
                     this.setState({
                       warnsnackbarvisible: false,
-                      snackbarvisible: false
+                      snackbarvisible: false,
                     });
                     this.setState({
                       warnsnackbarvisible: true,
                       warnsnackbarvisiblelabel:
-                        'Please Select At Least One Person'
+                        'Please Select At Least One Person',
                     });
                   } else {
                     this.setState(() => ({
-                      snackbarvisible: false
+                      snackbarvisible: false,
                     }));
                     this.setState(() => ({
                       snackbarvisible: true,
@@ -446,35 +436,30 @@ class Schedule extends Component {
                         ' People to your meeting.',
                       currentPosition: 4,
                       viewpeople: 0,
-                      summary: 1
+                      summary: 1,
                     }));
                   }
-                }}
-              >
+                }}>
                 <Text>Ok?</Text>
               </Button>
             </View>
           )}
           {this.state.summary === 1 && (
             <View>
-              <Card
-                style={{ marginLeft: 15, marginRight: 15, marginBottom: 20 }}
-              >
+              <Card style={{marginLeft: 15, marginRight: 15, marginBottom: 20}}>
                 <Content>
                   <Separator
                     bordered
                     style={{
                       paddingTop: 30,
                       paddingBottom: 30,
-                      backgroundColor: '#E8EAF6'
-                    }}
-                  >
+                      backgroundColor: '#E8EAF6',
+                    }}>
                     <Text
                       style={{
                         fontSize: 16,
-                        color: '#424242'
-                      }}
-                    >
+                        color: '#424242',
+                      }}>
                       {'At the date of ' +
                         this.state.dateselected +
                         ' starts at ' +
@@ -496,15 +481,14 @@ class Schedule extends Component {
                           if (index1 > -1) {
                             array.splice(index1, 1);
                           }
-                          this.setState({ peopleselected: array });
+                          this.setState({peopleselected: array});
                           this.setState({
                             peopleavailabletoselect: [
                               ...this.state.peopleavailabletoselect,
-                              { name: item }
-                            ]
+                              {name: item},
+                            ],
                           });
-                        }}
-                      >
+                        }}>
                         <Text>{item}</Text>
                       </ListItem>
                     );
@@ -515,7 +499,7 @@ class Schedule extends Component {
                 block
                 style={{
                   marginLeft: 20,
-                  marginRight: 20
+                  marginRight: 20,
                 }}
                 onPress={() => {
                   this.setState({
@@ -530,11 +514,10 @@ class Schedule extends Component {
                     viewenddateandgap: 0,
                     viewclockandroom: 0,
                     currentPosition: 0,
-                    viewpeople: 0
+                    viewpeople: 0,
                   });
                   //post?
-                }}
-              >
+                }}>
                 <Text>SAVE CHANGES?</Text>
               </Button>
             </View>
@@ -543,18 +526,17 @@ class Schedule extends Component {
         <Snackbar
           visible={this.state.warnsnackbarvisible}
           duration={1000}
-          onDismiss={() => this.setState({ warnsnackbarvisible: false })}
+          onDismiss={() => this.setState({warnsnackbarvisible: false})}
           action={{
             label: 'Ok',
-            onPress: () => {}
-          }}
-        >
+            onPress: () => {},
+          }}>
           {this.state.warnsnackbarvisiblelabel}
         </Snackbar>
         <Snackbar
           visible={this.state.snackbarvisible}
           duration={1500}
-          onDismiss={() => this.setState({ snackbarvisible: false })}
+          onDismiss={() => this.setState({snackbarvisible: false})}
           action={{
             label: 'Undo',
             onPress: () => {
@@ -573,7 +555,7 @@ class Schedule extends Component {
                   viewenddateandgap: 0,
                   viewclockandroom: 0,
                   currentPosition: 0,
-                  viewpeople: 0
+                  viewpeople: 0,
                 });
               } else if (
                 this.state.snackbarvisiblelabel.startsWith('Selected Room')
@@ -587,7 +569,7 @@ class Schedule extends Component {
                   endclockselected: '',
                   timegap: '',
                   currentPosition: 1,
-                  peopleselected: []
+                  peopleselected: [],
                 });
               } else if (this.state.snackbarvisiblelabel.startsWith('Until:')) {
                 this.setState({
@@ -597,7 +579,7 @@ class Schedule extends Component {
                   endclockselected: '',
                   timegap: '',
                   currentPosition: 2,
-                  peopleselected: []
+                  peopleselected: [],
                 });
               } else if (
                 this.state.snackbarvisiblelabel.startsWith('You added')
@@ -606,12 +588,11 @@ class Schedule extends Component {
                   viewpeople: 1,
                   summary: 0,
                   currentPosition: 3,
-                  peopleselected: []
+                  peopleselected: [],
                 });
               }
-            }
-          }}
-        >
+            },
+          }}>
           {this.state.snackbarvisiblelabel}
         </Snackbar>
       </Container>
