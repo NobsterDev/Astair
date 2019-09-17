@@ -15,7 +15,7 @@ import ListSchedulesByName from './App/Containers/SchedulerScreens/ListSchedules
 
 import ButtonBox from './App/Components/ButtonBox';
 import {Images} from './App/Themes';
-import styles from './App/Navigation/Styles/AppNavigationStyle';
+import styles from './App/Containers/Styles/AppNavigationStyle';
 import Loading from './App/Containers/Loading.js';
 class App extends React.Component {
   constructor() {
@@ -97,7 +97,6 @@ const myschedulesNavigator = createStackNavigator(
     ListSchedulesByName: {
       screen: ListSchedulesByName,
       navigationOptions: ({navigation}) => ({
-        //don't forget parentheses around the object notation
         title: 'ListSchedulesByName',
         headerTitleStyle: {width: Dimensions.get('window').width},
         headerLeft: (
@@ -111,10 +110,20 @@ const myschedulesNavigator = createStackNavigator(
     navigationOptions: {
       header: null,
     },
-    defaultNavigationOptions: {
-      //don't forget parentheses around the object notation
-      title: 'ListSchedulesByName',
-    },
+    defaultNavigationOptions: ({navigation}) => ({
+      title: 'Create New Schedule',
+      headerTintColor: '#FFFFFF',
+      headerStyle: {
+        backgroundColor: '#000051',
+      },
+      headerTitleStyle: {width: Dimensions.get('window').width},
+      headerLeft: (
+        <HeaderBackButton
+          tintColor="#FFFFFF"
+          onPress={() => navigation.goBack(null)}
+        />
+      ),
+    }),
   },
 );
 const createnewscheduleNavigator = createStackNavigator(
@@ -122,7 +131,6 @@ const createnewscheduleNavigator = createStackNavigator(
     CalendarScreen: {
       screen: CalendarScreen,
       navigationOptions: {
-        //don't forget parentheses around the object notation
         title: 'Calendar',
       },
     },
@@ -130,7 +138,6 @@ const createnewscheduleNavigator = createStackNavigator(
     RoomAndStartingClockScreen: {
       screen: RoomAndStartingClockScreen,
       navigationOptions: {
-        //don't forget parentheses around the object notation
         title: 'RoomAndStartingClockScreen',
       },
     },
@@ -138,29 +145,60 @@ const createnewscheduleNavigator = createStackNavigator(
     EndingClockScreen: {
       screen: EndingClockScreen,
       navigationOptions: {
-        //don't forget parentheses around the object notation
         title: 'EndingClockScreen',
       },
     },
 
     PeopleSelectScreen: {
       screen: PeopleSelectScreen,
-      navigationOptions: ({navigation}) => ({
-        //don't forget parentheses around the object notation
+      navigationOptions: {
         title: 'PeopleSelectScreen',
-      }),
+      },
     },
 
     SummaryScreen: {
       screen: SummaryScreen,
-      navigationOptions: ({navigation}) => ({
-        //don't forget parentheses around the object notation
+      navigationOptions: {
         title: 'SummaryScreen',
-      }),
+      },
     },
   },
   {
     initialRouteName: 'CalendarScreen',
+    navigationOptions: {
+      header: null,
+    },
+    defaultNavigationOptions: ({navigation}) => ({
+      title: 'Create New Schedule',
+      headerTintColor: '#FFFFFF',
+      headerStyle: {
+        backgroundColor: '#000051',
+      },
+      headerTitleStyle: {width: Dimensions.get('window').width},
+      headerLeft: (
+        <HeaderBackButton
+          tintColor="#FFFFFF"
+          onPress={() => navigation.goBack(null)}
+        />
+      ),
+    }),
+  },
+);
+
+const scheduleNavigator = createStackNavigator(
+  {
+    Scheduler: {
+      screen: Scheduler,
+      navigationOptions: {
+        //don't forget parentheses around the object notation
+        title: 'Scheduler',
+      },
+    },
+    newschedule: {screen: createnewscheduleNavigator},
+    manageschedules: {screen: myschedulesNavigator},
+  },
+  {
+    initialRouteName: 'Scheduler',
     navigationOptions: {
       header: null,
     },
@@ -182,49 +220,36 @@ const createnewscheduleNavigator = createStackNavigator(
   },
 );
 
-const scheduleNavigator = createStackNavigator(
-  {
-    Scheduler: {
-      screen: Scheduler,
-      navigationOptions: ({navigation}) => ({
-        //don't forget parentheses around the object notation
-        title: 'Scheduler',
-
-        headerTintColor: '#FFFFFF',
-        headerStyle: {
-          backgroundColor: '#000051',
-        },
-        headerTitleStyle: {width: Dimensions.get('window').width},
-        headerLeft: (
-          <HeaderBackButton
-            tintColor="#FFFFFF"
-            onPress={() => navigation.goBack(null)}
-          />
-        ),
-      }),
-    },
-    newschedule: {screen: createnewscheduleNavigator},
-    manageschedules: {screen: myschedulesNavigator},
-  },
-  {
-    initialRouteName: 'Scheduler',
-    navigationOptions: {
-      header: null,
-    },
-    defaultNavigationOptions: {},
-  },
-);
-
 const mainNavigator = createStackNavigator(
   {
     Navigationmenu: {screen: App},
     Scheduler: {
       screen: scheduleNavigator,
     },
-    AirConditioner: {screen: AirConditioner},
+    AirConditioner: {
+      screen: AirConditioner,
+      navigationOptions: {
+        //don't forget parentheses around the object notation
+        title: 'Air Conditioner',
+      },
+    },
   },
   {
     initialRouteName: 'Navigationmenu',
+    defaultNavigationOptions: ({navigation}) => ({
+      //don't forget parentheses around the object notation
+      headerTintColor: '#FFFFFF',
+      headerStyle: {
+        backgroundColor: '#000051',
+      },
+      headerTitleStyle: {width: Dimensions.get('window').width},
+      headerLeft: (
+        <HeaderBackButton
+          tintColor="#FFFFFF"
+          onPress={() => navigation.goBack(null)}
+        />
+      ),
+    }),
   },
 );
 

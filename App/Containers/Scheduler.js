@@ -3,9 +3,6 @@ import {ScrollView, View, Text} from 'react-native';
 import ButtonBox from '../Components/ButtonBox';
 import {Images} from '../Themes';
 
-import {Calendar} from 'react-native-calendars';
-import {Snackbar} from 'react-native-paper';
-
 import styles from './Styles/SchedulerStyle';
 export default class Scheduler extends React.Component {
   openScheduler = () => {
@@ -38,9 +35,6 @@ export default class Scheduler extends React.Component {
             />
           </View>
         </ScrollView>
-        <View style={styles.banner}>
-          <Text style={styles.bannerLabel}>This is Astar Project</Text>
-        </View>
       </View>
     );
   }

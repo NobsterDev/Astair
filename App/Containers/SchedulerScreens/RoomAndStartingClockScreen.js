@@ -1,8 +1,7 @@
 import React from 'react';
-import {ScrollView, View, Text, Image} from 'react-native';
-import {Images} from '../../Themes';
+import {ScrollView, View, Text} from 'react-native';
 import Stepindicator from '../../Components/StepIndicator';
-
+import {DataTable} from 'react-native-paper';
 import styles from './Styles/RoomAndStartingClockScreenStyle';
 
 export default class RoomAndStartingClockScreen extends React.Component {
@@ -12,21 +11,52 @@ export default class RoomAndStartingClockScreen extends React.Component {
         <ScrollView style={styles.container} ref="container">
           <Stepindicator currentPosition={1} />
           <View style={styles.scrollContent}>
-            <View style={{alignItems: 'center', paddingTop: 60}}>
-              <Image source={Images.api} style={styles.logo} />
-              <Text style={styles.titleText}>API</Text>
-            </View>
-            <View style={styles.section}>
-              <Text style={styles.sectionText}>
-                Testing API with Postman or APIary.io verifies the server works.
-                The API Test screen is the next step; a simple in-app way to
-                verify and debug your in-app API functions.
-              </Text>
-              <Text style={styles.sectionText}>
-                Create new endpoints in Services/Api.js then add example uses to
-                endpoints array in Containers/APITestingScreen.js
-              </Text>
-            </View>
+            <DataTable style={styles.table}>
+              <DataTable.Header>
+                <DataTable.Title>Dessert</DataTable.Title>
+                <DataTable.Title numeric>Fat</DataTable.Title>
+              </DataTable.Header>
+
+              <DataTable.Row>
+                <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+                <DataTable.Cell numeric>159</DataTable.Cell>
+              </DataTable.Row>
+
+              <DataTable.Row>
+                <DataTable.Cell>Ice cream sandwich</DataTable.Cell>
+                <DataTable.Cell numeric>237</DataTable.Cell>
+              </DataTable.Row>
+
+              <DataTable.Row>
+                <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+                <DataTable.Cell numeric>159</DataTable.Cell>
+              </DataTable.Row>
+              <DataTable.Row>
+                <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+                <DataTable.Cell numeric>159</DataTable.Cell>
+              </DataTable.Row>
+              <DataTable.Row>
+                <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+                <DataTable.Cell numeric>159</DataTable.Cell>
+              </DataTable.Row>
+              <DataTable.Row>
+                <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+                <DataTable.Cell numeric>159</DataTable.Cell>
+              </DataTable.Row>
+              <DataTable.Row>
+                <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+                <DataTable.Cell numeric>159</DataTable.Cell>
+              </DataTable.Row>
+
+              <DataTable.Pagination
+                page={1}
+                numberOfPages={3}
+                onPageChange={page => {
+                  console.log(page);
+                }}
+                label="1-2 of 6"
+              />
+            </DataTable>
           </View>
         </ScrollView>
       </View>
