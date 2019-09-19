@@ -17,6 +17,15 @@ import ButtonBox from './App/Components/ButtonBox';
 import {Images} from './App/Themes';
 import styles from './App/Containers/Styles/AppNavigationStyle';
 import Loading from './App/Containers/Loading.js';
+import {YellowBox} from 'react-native';
+
+YellowBox.ignoreWarnings([
+  'Warning: componentWillUpdate is deprecated',
+  'Warning: componentWillMount is deprecated',
+  'Warning: componentWillReceiveProps is deprecated',
+  'Warning: ViewPagerAndroid has been',
+  'Module RCTImageLoader requires',
+]);
 class App extends React.Component {
   constructor() {
     super();

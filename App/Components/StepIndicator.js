@@ -12,7 +12,7 @@ const labels = [
   'The         Summary',
 ];
 
-export default class ButtonBox extends React.Component {
+export default class StepIndicator1 extends React.Component {
   static propTypes = {
     currentPosition: PropTypes.number,
   };
