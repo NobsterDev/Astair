@@ -26,7 +26,7 @@ export default class CalendarScreen extends React.Component {
           <Text style={styles.Text}>Select Desired Date</Text>
           <Calendar
             style={styles.Calendar}
-            onDayPress={day => {
+            onDayPress={() => {
               this.props.navigation.navigate('RoomAndStartingClockScreen');
             }}
             hideExtraDays={true}

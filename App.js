@@ -140,35 +140,35 @@ const createnewscheduleNavigator = createStackNavigator(
     CalendarScreen: {
       screen: CalendarScreen,
       navigationOptions: {
-        title: 'Calendar',
+        title: 'Date',
       },
     },
 
     RoomAndStartingClockScreen: {
       screen: RoomAndStartingClockScreen,
       navigationOptions: {
-        title: 'RoomAndStartingClockScreen',
+        title: 'Room and Zero Hour',
       },
     },
 
     EndingClockScreen: {
       screen: EndingClockScreen,
       navigationOptions: {
-        title: 'EndingClockScreen',
+        title: 'Finishing Time',
       },
     },
 
     PeopleSelectScreen: {
       screen: PeopleSelectScreen,
       navigationOptions: {
-        title: 'PeopleSelectScreen',
+        title: 'Select Attenders',
       },
     },
 
     SummaryScreen: {
       screen: SummaryScreen,
       navigationOptions: {
-        title: 'SummaryScreen',
+        title: 'Summary',
       },
     },
   },

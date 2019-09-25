@@ -1,40 +1,140 @@
-import {Calendar} from 'react-native-calendars';
-import React, {Component} from 'react';
-import {ScrollView, View, Text, TouchableOpacity, Image} from 'react-native';
-import {Images} from '../../Themes';
-
+import {FAB} from 'react-native-paper';
 import styles from './Styles/PeopleSelectScreenStyle';
+import React from 'react';
+import {ScrollView, View, Text} from 'react-native';
+import Stepindicator from '../../Components/StepIndicator';
+import {Snackbar} from 'react-native-paper';
+import Swipeable from 'react-native-swipeable-row';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class PeopleSelectScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      toggle: false,
+      People: [
+        'Vladimir',
+        'Vladimir1',
+        'Vladimir2',
+        'Vladimir3',
+        'Vladimir4',
+        'Vladimir5',
+        'Vladimir6',
+        'Vladimir7',
+        'Vladimir8',
+        'Boris',
+        'Boris1',
+        'Boris2',
+        'Boris3',
+        'Boris4',
+        'Boris5',
+        'Boris6',
+        'Boris7',
+        'Boris8',
+      ],
+    };
+  }
+
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Image
-          source={Images.background}
-          style={styles.backgroundImage}
-          resizeMode="stretch"
-        />
+        <Stepindicator currentPosition={3} />
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+          style={styles.container}>
+          <Text style={styles.Text}>Selected People</Text>
 
-        <ScrollView style={styles.container} ref="container">
-          <View style={styles.scrollContent}>
-            <View style={{alignItems: 'center', paddingTop: 60}}>
-              <Image source={Images.api} style={styles.logo} />
-              <Text style={styles.titleText}>API</Text>
-            </View>
-            <View style={styles.section}>
-              <Text style={styles.sectionText}>
-                Testing API with Postman or APIary.io verifies the server works.
-                The API Test screen is the next step; a simple in-app way to
-                verify and debug your in-app API functions.
-              </Text>
-              <Text style={styles.sectionText}>
-                Create new endpoints in Services/Api.js then add example uses to
-                endpoints array in Containers/APITestingScreen.js
-              </Text>
-            </View>
-          </View>
+          {this.state.People.map((data, index) => (
+            <SwipeableListItem key={index} name={data} />
+          ))}
         </ScrollView>
+        <FAB.Group
+          color={'#FFFFFF'}
+          fabStyle={{backgroundColor: '#303f9f'}}
+          open={this.state.open}
+          icon={this.state.open ? 'done' : 'create'}
+          actions={[
+            {icon: 'add', label: 'Add People', onPress: () => {}},
+            {icon: 'close', label: 'Remove People', onPress: () => {}},
+          ]}
+          onStateChange={({open}) => this.setState({open})}
+          onPress={() => {
+            if (this.state.open) {
+              // do something if the speed dial is open
+            }
+          }}
+        />
+        <Snackbar
+          duration={1500}
+          theme={{colors: {accent: 'black'}}}
+          style={{backgroundColor: '#FFFFFF'}}
+          visible={this.state.visible}
+          onDismiss={() => this.setState({visible: false})}
+          action={{
+            label: 'Contact Administrator',
+            onPress: () => {
+              // Do Something Admin
+            },
+          }}>
+          <Text style={{color: '#000000'}}>Successfully Deleted.</Text>
+        </Snackbar>
       </View>
     );
+  }
+}
+
+class SwipeableListItem extends React.Component {
+  state = {
+    leftActionActivated: false,
+    toggle: true,
+  };
+
+  render() {
+    const {leftActionActivated, toggle} = this.state;
+    if (this.state.toggle === true) {
+      return (
+        <Swipeable
+          leftActionActivationDistance={100}
+          leftContent={
+            <View
+              style={[
+                styles.leftSwipeItem,
+                {
+                  backgroundColor: leftActionActivated ? 'red' : '#5f5fc4',
+                },
+              ]}>
+              {leftActionActivated ? (
+                <Icon name="trash-o" size={30} color="#FFFFFF" />
+              ) : (
+                <Icon name="long-arrow-right" size={30} color="#FFFFFF" />
+              )}
+            </View>
+          }
+          onLeftActionActivate={() =>
+            this.setState({leftActionActivated: true})
+          }
+          onLeftActionDeactivate={() =>
+            this.setState({leftActionActivated: false})
+          }
+          onLeftActionComplete={() => this.setState({toggle: !toggle})}>
+          <View
+            style={[
+              styles.listItem,
+              {backgroundColor: toggle ? '#FFFFFF' : '#FFFFFF'},
+            ]}>
+            <View>
+              <Text style={styles.text}>{this.props.name}</Text>
+            </View>
+            <View>
+              <Icon name="long-arrow-right" size={30} color="#001064" />
+            </View>
+          </View>
+        </Swipeable>
+      );
+    } else {
+      return null;
+    }
   }
 }

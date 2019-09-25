@@ -10,22 +10,8 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     fontSize: 30,
-    marginBottom: 50,
+    marginBottom: 30,
     marginTop: 40,
-  },
-  tcontainer: {flex: 1, padding: 16, paddingTop: 30},
-  thead: {height: 40, flex: 1},
-  trow: {height: 28},
-  ttext: {textAlign: 'center', fontSize: 18},
-  htext: {textAlign: 'center', fontSize: 26},
-
-  slide1: {
-    flex: 1,
-    borderRadius: 50,
-    marginLeft: 15,
-    marginRight: 15,
-    justifyContent: 'center',
-    backgroundColor: '#152145',
   },
   wrapper: {marginBottom: 40},
   text: {
@@ -33,13 +19,29 @@ export default StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
-  tableview: {
+
+  tablestyle: {
     backgroundColor: '#FFFFFF',
-    marginLeft: 15,
-    marginRight: 15,
-    borderRadius: 40,
-    flex: 1,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 40,
   },
-  tabletext: {margin: 6, textAlign: 'center'},
-  tablerow: {flexDirection: 'row', backgroundColor: '#FFF1C1'},
+  tablerow: {
+    borderColor: '#000051',
+    borderWidth: 2,
+  },
+  tabletext: {
+    color: '#000000',
+    margin: 10,
+    textAlign: 'center',
+  },
+  tabletexthead: {
+    color: '#FFFFFF',
+    margin: 10,
+    textAlign: 'center',
+  },
+  tableHead: {
+    height: 55,
+    backgroundColor: '#000051',
+  },
 });

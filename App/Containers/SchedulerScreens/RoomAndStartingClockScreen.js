@@ -3,41 +3,34 @@ import {
   ScrollView,
   View,
   Text,
-  TouchableOpacity,
   Dimensions,
+  TouchableHighlight,
 } from 'react-native';
 import Stepindicator from '../../Components/StepIndicator';
 import styles from './Styles/RoomAndStartingClockScreenStyle';
-import {
-  Table,
-  TableWrapper,
-  Row,
-  Cell,
-  Rows,
-  Col,
-} from 'react-native-table-component';
+import {Table, Row} from 'react-native-table-component';
 import Swiper from 'react-native-swiper';
-import {Snackbar} from 'react-native-paper';
+import {Snackbar, TouchableRipple} from 'react-native-paper';
 
 const table = {
   tableHead: ['Room Alpha', 'Room Beta', 'Room Chalie'],
   tableTitle: [
     '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
-    '9:00',
+    '9:30',
+    '10:00',
+    '10:30',
+    '11:00',
+    '11:30',
+    '12:00',
+    '12:30',
+    '13:00',
+    '13:30',
+    '14:00',
+    '14:30',
+    '15:00',
+    '15:30',
+    '16:00',
+    '16:30',
   ],
   tableData: [
     [
@@ -96,112 +89,89 @@ const table = {
     ],
   ],
 };
-
+//action dialog ekle room seçim
 export default class RoomAndStartingClockScreen extends React.Component {
-  state = {
-    visible: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false,
+    };
+  }
 
   render() {
-    const element = (data, index) => (
-      <TouchableOpacity
-        style={{paddingTop: 5, paddingBottom: 5}}
-        onPress={() => {
-          if (data.toString().length === 0) {
-            console.log(index);
-          } else {
-            this.setState({visible: false});
-            this.setState({visible: true});
-          }
-        }}>
-        <View style={styles.btn}>
-          <Text style={styles.ttext}>{data}</Text>
-        </View>
-      </TouchableOpacity>
-    );
     return (
       <View style={styles.mainContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
           bounces={false}
           style={styles.container}
-          style={styles.container}
           ref="container">
           <Stepindicator currentPosition={1} />
           <Text style={styles.Text}>Select Desired Room and Zero Hour</Text>
           <Swiper
+            ref={swiper => {
+              this._swiper = swiper;
+            }}
             style={styles.wrapper}
             height={Dimensions.get('window').height * 0.8}
-            horizontal={false}>
+            dotColor={'white'}
+            horizontal={true}>
             {table.tableData.map((cellDataout, cellIndexout) => (
-              <View key={cellIndexout} style={styles.slide1}>
-                <Table
-                  borderStyle={{
-                    borderWidth: 2,
-                    borderColor: '#c8e1ff',
-                  }}>
-                  <TableWrapper style={styles.tablerow}>
-                    <Cell
-                      data={table.tableHead[cellIndexout]}
-                      textStyle={styles.tabletext}></Cell>
-                  </TableWrapper>
-                  <TableWrapper style={styles.tablerow}>
-                    <Text>{console.log({cellDataout})}</Text>
-                    <Cell textStyle={styles.tabletext} data={'9:00'}></Cell>
-                    <Cell textStyle={styles.tabletext} data={'asda'}></Cell>
-                  </TableWrapper>
-                </Table>
-              </View>
+              <Table key={cellIndexout} style={styles.tablestyle}>
+                <TouchableHighlight
+                  onPress={() => this._swiper.scrollBy(1)}
+                  style={styles.tablerow}>
+                  <Row
+                    style={styles.tableHead}
+                    data={[table.tableHead[cellIndexout]]}
+                    textStyle={styles.tabletexthead}
+                  />
+                </TouchableHighlight>
+                {cellDataout.map((datain, dataindex) =>
+                  datain !== '' ? (
+                    <TouchableRipple
+                      onPress={() =>
+                        this.setState(state => ({visible: !state.visible}))
+                      }
+                      style={styles.tablerow}
+                      key={dataindex}>
+                      <Row
+                        flexArr={[1, 4]}
+                        textStyle={styles.tabletext}
+                        data={[table.tableTitle[dataindex], datain]}
+                      />
+                    </TouchableRipple>
+                  ) : (
+                    <TouchableRipple
+                      onPress={() => {
+                        this.props.navigation.navigate('EndingClockScreen');
+                      }}
+                      style={styles.tablerow}
+                      key={dataindex}>
+                      <Row
+                        flexArr={[1, 4]}
+                        textStyle={styles.tabletext}
+                        data={[table.tableTitle[dataindex], datain]}
+                      />
+                    </TouchableRipple>
+                  ),
+                )}
+              </Table>
             ))}
           </Swiper>
-          {/* {table.tableData.map((cellDataout, cellIndexout) => (
-            <View key={cellIndexout} style={styles.tableview}>
-              <Table
-                borderStyle={{
-                  borderWidth: 2,
-                  borderColor: '#1a237e',
-                }}>
-                <Row
-                  data={table.tableHead}
-                  style={styles.thead}
-                  textStyle={styles.htext}
-                />
-                <TableWrapper style={{flexDirection: 'row'}}>
-                  <TableWrapper style={{flex: 1}}>
-                    {table.tableTitle.map((cellData, cellIndex) => (
-                      <Cell
-                        key={cellIndex}
-                        data={cellData}
-                        textStyle={styles.ttext}
-                      />
-                    ))}
-                  </TableWrapper>
-                  <TableWrapper style={{flex: 4}}>
-                    {cellDataout.map((cellData, cellIndex) => (
-                      <Cell
-                        key={cellIndex}
-                        data={element(cellData, cellIndex)}
-                        textStyle={styles.ttext}
-                      />
-                    ))}
-                  </TableWrapper>
-                </TableWrapper>
-              </Table>
-            </View>
-          ))} */}
         </ScrollView>
         <Snackbar
           duration={1500}
-          style={{backgroundColor: '#FFFFFF'}}
+          style={{backgroundColor: '#5f5fc4'}}
           visible={this.state.visible}
           onDismiss={() => this.setState({visible: false})}
           action={{
-            label: 'Contact Administrator',
+            label: 'OK?',
             onPress: () => {
               // Do Something Admin
             },
           }}>
-          <Text style={{color: '#000000'}}>Room Already Occupied</Text>
+          <Text style={{color: '#FFFFFF'}}>Room Already Occupied</Text>
         </Snackbar>
       </View>
     );

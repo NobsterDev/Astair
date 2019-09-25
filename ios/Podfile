@@ -27,6 +27,7 @@ target 'Astair' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+
   target 'AstairTests' do
     inherit! :search_paths
     # Pods for testing
