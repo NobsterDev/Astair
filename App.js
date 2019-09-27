@@ -19,6 +19,10 @@ import styles from './App/Containers/Styles/AppNavigationStyle';
 import Loading from './App/Containers/Loading.js';
 import {YellowBox} from 'react-native';
 
+import {PersistGate} from 'redux-persist/es/integration/react';
+import {Provider} from 'react-redux';
+import {store, persistor} from './App/Store/store';
+
 YellowBox.ignoreWarnings([
   'Warning: componentWillUpdate is deprecated',
   'Warning: componentWillMount is deprecated',
@@ -26,7 +30,19 @@ YellowBox.ignoreWarnings([
   'Warning: ViewPagerAndroid has been',
   'Module RCTImageLoader requires',
 ]);
-class App extends React.Component {
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Navigation />
+        </PersistGate>
+      </Provider>
+    );
+  }
+}
+class NavigationMenu extends React.Component {
   constructor() {
     super();
     this.state = {isLoading: true};
@@ -101,7 +117,7 @@ class App extends React.Component {
   }
 }
 
-const myschedulesNavigator = createStackNavigator(
+const MyschedulesNavigator = createStackNavigator(
   {
     ListSchedulesByName: {
       screen: ListSchedulesByName,
@@ -135,7 +151,7 @@ const myschedulesNavigator = createStackNavigator(
     }),
   },
 );
-const createnewscheduleNavigator = createStackNavigator(
+const CreatenewscheduleNavigator = createStackNavigator(
   {
     CalendarScreen: {
       screen: CalendarScreen,
@@ -194,7 +210,7 @@ const createnewscheduleNavigator = createStackNavigator(
   },
 );
 
-const scheduleNavigator = createStackNavigator(
+const ScheduleNavigator = createStackNavigator(
   {
     Scheduler: {
       screen: Scheduler,
@@ -203,8 +219,8 @@ const scheduleNavigator = createStackNavigator(
         title: 'Scheduler',
       },
     },
-    newschedule: {screen: createnewscheduleNavigator},
-    manageschedules: {screen: myschedulesNavigator},
+    newschedule: {screen: CreatenewscheduleNavigator},
+    manageschedules: {screen: MyschedulesNavigator},
   },
   {
     initialRouteName: 'Scheduler',
@@ -229,11 +245,11 @@ const scheduleNavigator = createStackNavigator(
   },
 );
 
-const mainNavigator = createStackNavigator(
+const MainNavigator = createStackNavigator(
   {
-    Navigationmenu: {screen: App},
+    Navigationmenu: {screen: NavigationMenu},
     Scheduler: {
-      screen: scheduleNavigator,
+      screen: ScheduleNavigator,
     },
     AirConditioner: {
       screen: AirConditioner,
@@ -248,6 +264,7 @@ const mainNavigator = createStackNavigator(
     defaultNavigationOptions: ({navigation}) => ({
       //don't forget parentheses around the object notation
       headerTintColor: '#FFFFFF',
+
       headerStyle: {
         backgroundColor: '#000051',
       },
@@ -262,4 +279,4 @@ const mainNavigator = createStackNavigator(
   },
 );
 
-export default createAppContainer(mainNavigator);
+let Navigation = createAppContainer(MainNavigator);

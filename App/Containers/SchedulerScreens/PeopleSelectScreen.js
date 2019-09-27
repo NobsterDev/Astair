@@ -1,4 +1,4 @@
-import {FAB} from 'react-native-paper';
+import {FAB, Searchbar} from 'react-native-paper';
 import styles from './Styles/PeopleSelectScreenStyle';
 import React from 'react';
 import {ScrollView, View, Text} from 'react-native';
@@ -13,6 +13,7 @@ export default class PeopleSelectScreen extends React.Component {
     this.state = {
       open: false,
       toggle: false,
+      firstQuery: '',
       People: [
         'Vladimir',
         'Vladimir1',
@@ -45,7 +46,14 @@ export default class PeopleSelectScreen extends React.Component {
           bounces={false}
           style={styles.container}>
           <Text style={styles.Text}>Selected People</Text>
-
+          <Searchbar
+            style={{marginBottom: 40, marginLeft: 15, marginRight: 15}}
+            placeholder="Search"
+            onChangeText={query => {
+              this.setState({firstQuery: query});
+            }}
+            value={this.state.firstQuery}
+          />
           {this.state.People.map((data, index) => (
             <SwipeableListItem key={index} name={data} />
           ))}
